@@ -5,6 +5,7 @@ import { ApiHandler } from "../"
 import { ApiHandlerOptions, ModelInfo, openRouterDefaultModelId, openRouterDefaultModelInfo } from "../../shared/api"
 import { convertToOpenAiMessages } from "../transform/openai-format"
 import { ApiStream } from "../transform/stream"
+import { version } from "../../../package.json"
 import delay from "delay"
 
 export class OpenRouterHandler implements ApiHandler {
@@ -151,7 +152,7 @@ export class OpenRouterHandler implements ApiHandler {
 			const response = await axios.get(`https://openrouter.ai/api/v1/generation?id=${genId}`, {
 				headers: {
 					Authorization: `Bearer ${this.options.openRouterApiKey}`,
-					"User-Agent": "Cline",
+					"User-Agent": `Cline/${version}`,
 				},
 				timeout: 5_000, // this request hangs sometimes
 			})
